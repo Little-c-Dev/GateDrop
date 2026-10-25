@@ -50,5 +50,9 @@ for (const source of sources.filter(source => source.mode === 'json-ld')) {
 const manual = existing.events.filter(event => !sources.some(source => source.mode === 'json-ld' && event.series === source.series));
 const events = [...manual, ...automatic].filter(event => new Date(event.firstGate) > new Date(Date.now() - 86400000));
 events.sort((a, b) => a.priority - b.priority || new Date(a.firstGate) - new Date(b.firstGate));
-await writeFile(new URL('../data/events.json', import.meta.url), JSON.stringify({ schemaVersion: 1, updatedAt: new Date().toISOString(), events }, null, 2) + '\n');
+const feed = JSON.stringify({ schemaVersion: 1, updatedAt: new Date().toISOString(), events }, null, 2) + '\n';
+await Promise.all([
+  writeFile(new URL('../data/events.json', import.meta.url), feed),
+  writeFile(new URL('../events.json', import.meta.url), feed)
+]);
 console.log(`Wrote ${events.length} upcoming events.`);

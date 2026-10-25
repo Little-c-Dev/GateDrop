@@ -1,6 +1,6 @@
 # GateDrop schedule data
 
-The app loads `data/events.json`. It is the only schedule endpoint the mobile UI needs.
+The app loads the published `events.json` feed. The app also keeps `data/events.json` inside the APK as an offline fallback.
 
 ## Sources
 
@@ -16,8 +16,8 @@ The updater runs every six hours after the project is hosted on GitHub. It reads
 
 ## Updating an event manually
 
-Add or change an object in `data/events.json`. Every event needs a stable `id`, ISO 8601 `date` and `firstGate` values with an offset, a `series`, coverage links, and a `sourceUrl`. Add `liveStart` and `liveEnd` when official coverage is known; the app switches to its red live-event theme inside that window. Add `imageUrl` when an organizer provides approved event imagery. The phone uses the ISO offset to display the time in the viewer's device time zone.
+Add or change an object in both `events.json` and `data/events.json`. Every event needs a stable `id`, ISO 8601 `date` and `firstGate` values with an offset, a `series`, coverage links, and a `sourceUrl`. Add `liveStart` and `liveEnd` when official coverage is known; the app switches to its red live-event theme inside that window. Add `imageUrl` when an organizer provides approved event imagery. The phone uses the ISO offset to display the time in the viewer's device time zone.
 
 ## Serving the app
 
-Use any static host, including GitHub Pages, Netlify, or Vercel. The app requests `data/events.json` at startup. When opened as a local `file:` preview it keeps the embedded fallback schedule, because browsers restrict local file requests.
+The live endpoint is [https://little-c-dev.github.io/GateDrop/events.json](https://little-c-dev.github.io/GateDrop/events.json). When opened as a local `file:` preview, the app keeps the embedded fallback schedule because browsers restrict local file requests.
