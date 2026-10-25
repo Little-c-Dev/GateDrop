@@ -6,13 +6,13 @@ The app loads the published `events.json` feed. The app also keeps `data/events.
 
 | Series | Calendar and event details | Watch destination | Update method |
 | --- | --- | --- | --- |
-| Hard Enduro | [FIM Hard Enduro](https://fim-hardenduro.com/) | Official event or YouTube link | Manual review |
-| EnduroCross | [EnduroCross schedule](https://endurocross.com/2026-schedule/) | [EnduroCross TV](https://endurocross.com/tv/) | JSON-LD updater |
-| AMA Supercross | [SuperMotocross](https://www.supermotocross.com/) | [Peacock](https://www.peacocktv.com/sports/supermotocross) | Manual review |
-| Pro Motocross | [Pro Motocross](https://promotocross.com/) | [Peacock](https://promotocross.com/watch) | Manual review |
-| SMX Playoffs | [SuperMotocross](https://www.supermotocross.com/) | [Peacock](https://www.peacocktv.com/sports/supermotocross) | Manual review |
+| Hard Enduro | [FIM Hard Enduro calendar](https://fim-hardenduro.com/calendar) | Official event or YouTube link | Official calendar scan |
+| EnduroCross | [EnduroCross schedule](https://endurocross.com/2026-schedule/) | [EnduroCross TV](https://endurocross.com/tv/) | Structured-event scan |
+| AMA Supercross | [SuperMotocross schedule](https://www.supermotocross.com/schedule/) | [Peacock](https://www.peacocktv.com/sports/supermotocross) | Official schedule scan |
+| Pro Motocross | [SuperMotocross schedule](https://www.supermotocross.com/schedule/) | [Peacock](https://promotocross.com/watch) | Official schedule scan |
+| SMX Playoffs | [SuperMotocross schedule](https://www.supermotocross.com/schedule/) | [Peacock](https://www.peacocktv.com/sports/supermotocross) | Official schedule scan |
 
-The updater runs every six hours after the project is hosted on GitHub. It reads only the structured event data exposed by EnduroCross, validates it, and writes a new feed when it finds changes. The other sources are intentionally reviewed before publishing because their official calendar and broadcast pages can change format, and first-gate and coverage times often arrive separately.
+The updater runs every six hours on GitHub. It scans each series' official calendar and writes a new feed when it finds changes. Times remain provisional when an official calendar has not published a first-gate time; the feed updates when the source adds it.
 
 ## Updating an event manually
 

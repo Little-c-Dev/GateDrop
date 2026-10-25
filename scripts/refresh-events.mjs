@@ -2,57 +2,32 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 const sources = JSON.parse(await readFile(new URL('../data/sources.json', import.meta.url))).sources;
 const existing = JSON.parse(await readFile(new URL('../data/events.json', import.meta.url)));
+const months = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+const zoneNames = {pt:'America/Los_Angeles',mt:'America/Denver',ct:'America/Chicago',et:'America/New_York'};
+const clean = value => value.replace(/\s+/g, ' ').trim();
+const idFor = (source, name, date) => `${source.id}-${name}-${date}`.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
-function flatten(value) {
-  if (!value || typeof value !== 'object') return [];
-  if (Array.isArray(value)) return value.flatMap(flatten);
-  return [value, ...Object.values(value).flatMap(flatten)];
-}
+function flatten(value) { return !value || typeof value !== 'object' ? [] : Array.isArray(value) ? value.flatMap(flatten) : [value, ...Object.values(value).flatMap(flatten)]; }
+function text(html) { return clean(html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&#8217;|&rsquo;/gi, "'")); }
+function seasonYear() { const now = new Date(); return now.getUTCFullYear() + (now.getUTCMonth() >= 8 ? 1 : 0); }
+function url(source) { return source.calendarUrl.replace('{year}', String(seasonYear())); }
+function offsetAt(year, month, day, hour, minute, abbrev) { const zone = zoneNames[abbrev?.toLowerCase()] || 'America/New_York'; const label = new Intl.DateTimeFormat('en-US',{timeZone:zone,timeZoneName:'longOffset'}).formatToParts(new Date(Date.UTC(year,month,day,hour,minute))).find(part => part.type === 'timeZoneName')?.value; return label?.replace('GMT','') || '-04:00'; }
+function iso(year, month, day, time, zone) { const parts = (time || '12:00 pm').match(/(\d{1,2}):(\d{2})\s*(am|pm)/i)?.slice(1) || ['12','00','pm']; let hour = Number(parts[0]) % 12; if (parts[2].toLowerCase() === 'pm') hour += 12; return `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}T${String(hour).padStart(2,'0')}:${parts[1]}:00${offsetAt(year,month,day,hour,Number(parts[1]),zone)}`; }
+function event(source, name, where, firstGate, round) { return {id:idFor(source,name,firstGate),name,round,series:source.series,date:firstGate,firstGate,where,status:'live',provider:source.series === 'EnduroCross' ? 'EnduroCross TV' : 'Official schedule',watchUrl:source.watchUrl,highlightsUrl:source.highlightsUrl,priority:source.priority,sourceUrl:url(source)}; }
+async function page(source) { const response = await fetch(url(source), {headers:{'user-agent':'GateDrop schedule updater'}}); if (!response.ok) throw new Error(`${source.id}: ${response.status}`); return response.text(); }
 
-function eventFromJsonLd(item, source) {
-  if (item['@type'] !== 'Event' || !item.name || !item.startDate) return null;
-  const location = item.location?.name || item.location?.address?.addressLocality || 'Venue to be confirmed';
-  return {
-    id: `${source.id}-${item.url || item.name}`.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
-    name: item.name.replace(/^Rd\.\s*\d+:\s*/i, ''),
-    round: source.series,
-    series: source.series,
-    date: item.startDate,
-    firstGate: item.startDate,
-    liveStart: item.startDate,
-    liveEnd: item.endDate || item.startDate,
-    where: location,
-    status: 'live',
-    provider: source.id === 'endurocross' ? 'EnduroCross TV' : 'Official coverage',
-    watchUrl: source.watchUrl,
-    highlightsUrl: source.highlightsUrl,
-    imageUrl: typeof item.image === 'string' ? item.image : undefined,
-    priority: source.priority,
-    sourceUrl: item.url || source.calendarUrl
-  };
-}
+async function jsonLd(source) { const html = await page(source); const blocks = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]; const records = blocks.flatMap(match => { try { return flatten(JSON.parse(match[1])); } catch { return []; } }); return records.map(item => { if (item['@type'] !== 'Event' || !item.name || !item.startDate) return null; const location = item.location?.name || item.location?.address?.addressLocality || 'Venue to be confirmed'; return {...event(source,item.name.replace(/^Rd\.\s*\d+:\s*/i,''),location,item.startDate,source.series),liveStart:item.startDate,liveEnd:item.endDate || item.startDate,imageUrl:typeof item.image === 'string' ? item.image : undefined,sourceUrl:item.url || url(source)}; }).filter(Boolean); }
+async function hardEnduro(source) { const body = text(await page(source)); const year = Number(body.match(/(20\d{2})\s+Season/i)?.[1] || new Date().getUTCFullYear()); const pattern = /([A-Z]{3})\s*(\d{1,2})[-–](\d{1,2})\s+Round\s+(\d+)\s*·\s*(.+?)(?=(?:[A-Z]{3}\s*\d{1,2}[-–])|The FIM)/g; return [...body.matchAll(pattern)].map(match => event(source,clean(match[5]).replace(/\s+(A classic|Urban hard|North America's|Sweden's|A legendary|Turkey|A spectacular).*$/i,''),'Official venue details',iso(year,months[match[1].toLowerCase()],Number(match[2])),`Round ${match[4]}`)); }
+async function proMotocross(source) { const body = text(await page(source)); const year = Number(body.match(/(20\d{2})\s+Race Results/i)?.[1] || seasonYear()); const pattern = /(May|June|July|August)\s+(\d{1,2})\s+(.+?)\s+([A-Z][A-Za-z .'-]+,\s*[A-Z]{2})\s+(?=Tickets|Details|May|June|July|August|©)/gi; return [...body.matchAll(pattern)].map((match,index) => event(source,clean(match[3]),clean(match[4]),iso(year,months[match[1].slice(0,3).toLowerCase()],Number(match[2])),`Round ${index+1}`)); }
+async function smxSchedule(source) { const pageText = text(await page(source)); const body = pageText.includes('Upcoming upcoming past events -->') ? pageText.split('Upcoming upcoming past events -->').pop() : pageText; const year = Number(pageText.match(/(20\d{2})\s+SMX Schedule/i)?.[1] || seasonYear()); const pattern = /Round\s+(\d+)(?:\s+Championship Round)?\s+(.+?)\s+-->\s+(\d{1,2})\s+(jan|feb|mar|apr|may|jun|jul|aug|sep)\s*(\d{1,2}:\d{2}\s*(?:am|pm))?\s*(pt|mt|ct|et)?/gi; const wanted = source.rounds === 'supercross' ? round => round <= 17 : source.rounds === 'motocross' ? round => round >= 18 && round <= 28 : round => round >= 29; return [...body.matchAll(pattern)].filter(match => wanted(Number(match[1]))).map(match => { const round = Number(match[1]); const title = source.rounds === 'playoffs' ? (round === 31 ? 'SMX World Championship Final' : `SMX Playoff ${round-28}`) : source.rounds === 'motocross' ? `Pro Motocross Round ${round-17}` : `AMA Supercross Round ${round}`; return event(source,title,clean(match[2]),iso(year,months[match[4].toLowerCase()],Number(match[3]),match[5],match[6]),source.rounds === 'playoffs' ? (round === 31 ? 'World Championship Final' : `Playoff ${round-28}`) : `Round ${source.rounds === 'motocross' ? round-17 : round}`); }); }
 
-async function loadJsonLd(source) {
-  const response = await fetch(source.calendarUrl, { headers: { 'user-agent': 'GateDrop schedule updater (contact: schedule@gatedrop.app)' } });
-  if (!response.ok) throw new Error(`${source.id}: ${response.status}`);
-  const page = await response.text();
-  const blocks = [...page.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
-  const records = blocks.flatMap(match => { try { return flatten(JSON.parse(match[1])); } catch { return []; } });
-  return records.map(item => eventFromJsonLd(item, source)).filter(Boolean);
-}
-
+const loaders = {'json-ld':jsonLd,'hard-enduro-calendar':hardEnduro,'pro-motocross-list':proMotocross,'smx-schedule':smxSchedule};
 const automatic = [];
-for (const source of sources.filter(source => source.mode === 'json-ld')) {
-  try { automatic.push(...await loadJsonLd(source)); }
-  catch (error) { console.warn(`Keeping last known ${source.series} events: ${error.message}`); }
-}
-
-const manual = existing.events.filter(event => !sources.some(source => source.mode === 'json-ld' && event.series === source.series));
-const events = [...manual, ...automatic].filter(event => new Date(event.firstGate) > new Date(Date.now() - 86400000));
-events.sort((a, b) => a.priority - b.priority || new Date(a.firstGate) - new Date(b.firstGate));
-const feed = JSON.stringify({ schemaVersion: 1, updatedAt: new Date().toISOString(), events }, null, 2) + '\n';
-await Promise.all([
-  writeFile(new URL('../data/events.json', import.meta.url), feed),
-  writeFile(new URL('../events.json', import.meta.url), feed)
-]);
+for (const source of sources) { try { automatic.push(...await loaders[source.mode](source)); } catch (error) { console.warn(`Keeping last known ${source.series} events: ${error.message}`); } }
+const refreshedSeries = new Set(automatic.map(item => item.series));
+const manual = existing.events.filter(item => !refreshedSeries.has(item.series));
+const events = [...manual,...automatic].filter(item => new Date(item.firstGate) > new Date(Date.now() - 86400000));
+events.sort((a,b) => a.priority - b.priority || new Date(a.firstGate) - new Date(b.firstGate));
+const feed = JSON.stringify({schemaVersion:1,updatedAt:new Date().toISOString(),events},null,2)+'\n';
+await Promise.all([writeFile(new URL('../data/events.json',import.meta.url),feed),writeFile(new URL('../events.json',import.meta.url),feed)]);
 console.log(`Wrote ${events.length} upcoming events.`);

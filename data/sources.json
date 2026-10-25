@@ -3,11 +3,11 @@
     {
       "id": "fim-hard-enduro",
       "series": "Hard Enduro",
-      "calendarUrl": "https://fim-hardenduro.com/",
+      "calendarUrl": "https://fim-hardenduro.com/calendar",
       "watchUrl": "https://fim-hardenduro.com/",
       "highlightsUrl": "https://www.youtube.com/@FIMHardEnduro",
       "priority": 0,
-      "mode": "manual-review"
+      "mode": "hard-enduro-calendar"
     },
     {
       "id": "endurocross",
@@ -21,29 +21,32 @@
     {
       "id": "supermotocross",
       "series": "AMA Supercross",
-      "calendarUrl": "https://www.supermotocross.com/",
+      "calendarUrl": "https://www.supermotocross.com/schedule/",
       "watchUrl": "https://www.peacocktv.com/sports/supermotocross",
       "highlightsUrl": "https://www.youtube.com/@SupercrossLive",
       "priority": 1,
-      "mode": "manual-review"
+      "mode": "smx-schedule",
+      "rounds": "supercross"
     },
     {
       "id": "pro-motocross",
       "series": "Pro Motocross",
-      "calendarUrl": "https://promotocross.com/",
+      "calendarUrl": "https://www.supermotocross.com/schedule/",
       "watchUrl": "https://promotocross.com/watch",
       "highlightsUrl": "https://www.youtube.com/@ProMotocross",
       "priority": 1,
-      "mode": "manual-review"
+      "mode": "smx-schedule",
+      "rounds": "motocross"
     },
     {
       "id": "smx-playoffs",
       "series": "SMX Playoffs",
-      "calendarUrl": "https://www.supermotocross.com/",
+      "calendarUrl": "https://www.supermotocross.com/schedule/",
       "watchUrl": "https://www.peacocktv.com/sports/supermotocross",
       "highlightsUrl": "https://www.youtube.com/@SuperMotocross",
       "priority": 1,
-      "mode": "manual-review"
+      "mode": "smx-schedule",
+      "rounds": "playoffs"
     }
   ]
 }
