@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101114" />
+  <meta name="description" content="A mobile-first calendar for the next live motocross, supercross, enduro and off-road races." />
+  <title>GateDrop — Live off-road racing</title>
+  <script>if(!new URLSearchParams(location.search).has('legacy'))location.replace(matchMedia('(max-width: 700px)').matches?'mobile.html':'desktop.html');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { color-scheme: dark; --bg:#101114; --panel:#191b20; --panel2:#20232a; --line:#30343c; --muted:#9a9fa9; --text:#f3f4f6; --blue:#0875d1; --blue2:#1389ed; --red:#ef3340; --safe:env(safe-area-inset-bottom,0px); }
+    * { box-sizing:border-box }
+    body { margin:0; background:var(--bg); color:var(--text); font:15px/1.45 'DM Sans',sans-serif; min-height:100vh; }
+    button { color:inherit; font:inherit; cursor:pointer; }
+    .app { max-width:1120px; margin:0 auto; padding:0 22px 48px; }
+    header { height:76px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #282923; }
+    .brand { display:flex; align-items:center; gap:10px; font:800 25px/.9 'Barlow Condensed',sans-serif; letter-spacing:.03em; text-transform:uppercase; }
+    .brand-mark { width:31px;height:31px;display:grid;place-items:center;background:var(--blue);color:white;clip-path:polygon(0 0,100% 0,100% 72%,70% 100%,0 100%);font-size:17px;font-weight:900; }
+    .brand span:last-child { color:var(--blue2) }
+    .header-right {display:flex;align-items:center;gap:17px;color:var(--muted);font-size:13px}
+    .location {display:flex;align-items:center;gap:7px}.location svg {width:15px;stroke:var(--blue2)}
+    .avatar {width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid #424751;color:var(--blue2);font-weight:700}
+    main { padding-top:32px; }
+    .eyebrow {font:700 12px 'DM Sans',sans-serif;color:var(--blue2);letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+    .eyebrow:before {content:'';height:2px;width:19px;background:var(--blue2)}
+    h1,h2,h3,p {margin:0}
+    h1 {font:800 clamp(42px,7vw,76px)/.92 'Barlow Condensed',sans-serif;letter-spacing:-.025em;text-transform:uppercase;margin:15px 0 28px;max-width:760px}
+    h1 em {font-style:normal;color:var(--blue2)}
+    .hero-card {position:relative;overflow:hidden;min-height:375px;border:1px solid #464a53;border-radius:5px;background:linear-gradient(90deg,rgba(10,11,14,.97) 0%,rgba(10,11,14,.89) 38%,rgba(10,11,14,.28) 75%,rgba(10,11,14,.14) 100%),linear-gradient(0deg,rgba(10,11,14,.42),transparent 60%),url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1800&q=85') center 47%/cover; }
+    .hero-card:after {content:'LIVE';position:absolute;right:-13px;top:12px;color:rgba(243,241,233,.06);font:900 170px/.8 'Barlow Condensed',sans-serif;letter-spacing:-.04em;pointer-events:none}
+    .hero-content {position:relative;z-index:1;max-width:560px;padding:30px 34px 26px;display:flex;flex-direction:column;min-height:375px;}
+    .status {display:inline-flex;align-items:center;gap:7px;background:rgba(8,117,209,.16);color:#75bfff;padding:6px 9px;border:1px solid rgba(19,137,237,.5);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;width:max-content}
+    .status i {width:6px;height:6px;background:var(--blue2);border-radius:50%;box-shadow:0 0 9px var(--blue2)}
+    .event-kicker {margin-top:22px;color:#d0d0c9;text-transform:uppercase;letter-spacing:.13em;font-weight:700;font-size:11px}
+    .hero-content h2 {font:800 clamp(43px,6vw,68px)/.88 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-.01em;margin-top:5px;max-width:460px}
+    .event-place {color:#c3c3ba;margin-top:11px;display:flex;align-items:center;gap:7px;font-size:13px}.event-place svg {width:15px;stroke:var(--blue2)}
+    .hero-bottom {margin-top:auto;padding-top:25px;display:flex;align-items:end;justify-content:space-between;gap:14px}
+    .count-label {color:#a6a69d;text-transform:uppercase;letter-spacing:.11em;font-size:10px;font-weight:700}
+    .countdown {font:700 25px 'Barlow Condensed',sans-serif;letter-spacing:.04em;margin-top:2px}.countdown span {color:var(--blue2)}
+    .watch-cta {height:46px;padding:0 18px;background:var(--blue);border:0;color:white;font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:9px;transition:transform .15s,background .15s}
+    .watch-cta:hover {transform:translateY(-2px);background:var(--blue2)}.watch-cta svg {width:16px;fill:currentColor}
+    .stats-row {display:flex;align-items:center;gap:0;padding:17px 23px;background:#151612;border:1px solid #30312c;border-top:0}
+    .stat {padding:0 25px;border-right:1px solid #363a42}.stat:first-child{padding-left:0}.stat:last-child{border:0}.stat small{display:block;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-size:9px;font-weight:700}.stat strong{display:block;font-size:13px;margin-top:4px}.series-badge{display:inline-flex!important;padding:3px 6px!important;background:#1d3040;color:#78c1ff;font-size:10px!important;letter-spacing:.07em}
+    .section-head {display:flex;align-items:end;justify-content:space-between;margin:39px 0 16px;gap:15px}
+    .section-head h2 {font:700 29px/.9 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.01em}
+    .section-head p {color:var(--muted);font-size:12px;margin-top:7px}
+    .view-all {border:0;background:transparent;color:var(--blue2);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.09em;display:flex;align-items:center;gap:6px}.view-all svg{width:13px;stroke:currentColor}
+    .filters {display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin-bottom:15px;padding-bottom:2px}.filters::-webkit-scrollbar{display:none}
+    .filter {white-space:nowrap;border:1px solid #393d45;background:transparent;color:#aaaeb7;padding:8px 13px;border-radius:2px;font-size:11px;font-weight:700;transition:all .15s}.filter.active,.filter:hover{background:var(--blue);color:white;border-color:var(--blue)}
+    .event-list {border-top:1px solid var(--line)}
+    .event-row {display:grid;grid-template-columns:56px minmax(0,1fr) auto 30px;align-items:center;gap:14px;padding:13px 10px;border-bottom:1px solid var(--line);transition:background .15s;cursor:pointer}
+    .event-row:hover,.event-row[open]{background:#171a20}.date-box {text-align:center;border-right:1px solid #393d45;padding-right:13px}.date-box b{display:block;font:700 23px/.9 'Barlow Condensed',sans-serif}.date-box span{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.08em;margin-top:5px}
+    .event-name {font-weight:700;font-size:13px}.event-meta {display:flex;gap:7px;align-items:center;color:var(--muted);font-size:10px;margin-top:4px}.event-meta .dot{width:3px;height:3px;border-radius:50%;background:#777b85}
+    .event-badges{display:flex;align-items:center;gap:6px;justify-content:flex-end}.discipline {font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#c7cbd2;border:1px solid #414650;padding:4px 6px;width:max-content}.availability{font-size:9px;font-weight:700;letter-spacing:.04em;padding:4px 6px;width:max-content}.availability.live{color:#79c3ff;background:#10293c;border:1px solid #1b5f8e}.availability.highlights{color:#ff9d9d;background:#371d21;border:1px solid #7b3038}
+    .expand-icon{width:19px;height:19px;stroke:#a9aeb8;transition:transform .18s}.event-row[open] .expand-icon{transform:rotate(180deg);stroke:var(--blue2)}.event-detail{grid-column:2/5;padding:5px 2px 4px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px 18px;color:#c9cdd4;font-size:11px}.detail-label{color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:2px}.event-detail a{color:#80c7ff;text-decoration:none}.event-detail a:hover{text-decoration:underline}
+    .empty {padding:35px;text-align:center;color:var(--muted);font-size:13px}.text-action{border:0;background:none;padding:0;color:#80c7ff;font-size:10px}.event-row summary::-webkit-details-marker{display:none}.series-picker{display:flex;gap:7px;overflow:auto;padding:0 0 10px;border-bottom:1px solid var(--line)}.series-choice{border:1px solid #393d45;background:#17191e;color:#afb4bd;padding:7px 10px;font-size:10px;white-space:nowrap}.series-choice input{accent-color:var(--blue);vertical-align:middle;margin:0 5px 0 0}.page-panel{position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:8;display:none;align-items:end;justify-content:center}.page-panel.open{display:flex}.panel-sheet{width:min(100%,620px);max-height:85vh;overflow:auto;background:#17191e;border:1px solid #393d45;padding:22px;border-radius:9px 9px 0 0;box-shadow:0 -15px 45px #0008}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.panel-head h2{font:700 28px 'Barlow Condensed',sans-serif;text-transform:uppercase}.panel-close{background:none;border:1px solid #454a55;width:34px;height:34px;color:#cdd1d8}.panel-section{padding:13px 0;border-top:1px solid #30343c}.panel-section h3{font-size:12px;margin-bottom:8px}.panel-section p{font-size:11px;color:var(--muted);margin-bottom:10px}.provider-link{display:flex;justify-content:space-between;gap:12px;padding:10px 0;color:#e8eaf0;text-decoration:none;border-top:1px solid #272b32;font-size:12px}.provider-link span{color:#80c7ff}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0;font-size:12px}.setting-row select{background:#20232a;border:1px solid #454a55;color:white;padding:8px}
+    .bottom-nav{display:none}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);padding:11px 16px;background:var(--blue);color:white;font-size:12px;font-weight:700;opacity:0;pointer-events:none;transition:all .2s;z-index:5}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:700px){
+      .app{padding:0 16px 34px}.header-right{gap:11px}.location span{display:none}.location svg{width:18px}.avatar{width:31px;height:31px}header{height:62px}.brand{font-size:23px}main{padding-top:24px}.eyebrow{font-size:10px}h1{font-size:52px;margin:13px 0 20px}.hero-card{min-height:416px;background-position:58% center;background-image:linear-gradient(90deg,rgba(10,11,14,.94) 0%,rgba(10,11,14,.77) 64%,rgba(10,11,14,.31) 100%),linear-gradient(0deg,rgba(10,11,14,.55),transparent 66%),url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1000&q=85')}.hero-card:after{font-size:126px;right:-9px}.hero-content{min-height:416px;padding:22px 20px}.event-kicker{font-size:10px;margin-top:25px}.hero-content h2{font-size:53px;max-width:300px}.event-place{font-size:12px}.hero-bottom{align-items:end}.countdown{font-size:22px}.watch-cta{height:43px;padding:0 13px;font-size:10px}.stats-row{padding:14px 15px;overflow:auto}.stat{padding:0 13px;white-space:nowrap}.stat:first-child{padding-left:0}.stat small{font-size:8px}.stat strong{font-size:11px}.section-head{margin-top:34px}.section-head h2{font-size:27px}.section-head p{font-size:11px}.event-row{grid-template-columns:47px minmax(0,1fr) auto 19px;gap:9px;padding:12px 3px}.date-box{padding-right:9px}.date-box b{font-size:21px}.event-name{font-size:12px}.event-meta{font-size:9px;gap:5px}.event-badges{gap:4px}.discipline{display:none}.availability{font-size:8px;padding:4px 5px}.event-detail{grid-column:2/5;grid-template-columns:1fr 1fr;gap:8px 12px;font-size:10px}.expand-icon{width:17px;height:17px}
+    }
+    @media(max-width:390px){.event-meta span:last-child,.event-meta .dot{display:none}.availability{letter-spacing:0;font-size:7px;padding:4px}}
+    @media(min-width:701px) and (max-width:900px){.event-row{grid-template-columns:51px minmax(0,1fr) auto 24px;gap:10px}.event-detail{grid-column:2/5}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand"><div class="brand-mark">G</div>Gate<span>Drop</span></div>
+      <div class="header-right">
+        <div class="location"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span id="feed-status">Times use your device</span></div>
+        <div class="avatar">JD</div>
+      </div>
+    </header>
+    <main>
+      <div class="eyebrow">Your race day starts here</div>
+      <h1>Never miss<br>the <em>gate drop.</em></h1>
+      <section class="hero-card" aria-label="Next livestreamed event">
+        <div class="hero-content">
+          <div class="status"><i></i> Next up · Live stream</div>
+          <div class="event-kicker" id="hero-kicker">Hard Enduro · FIM World Championship</div>
+          <h2 id="hero-title">Erzbergrodeo<br>Main Race</h2>
+          <div class="event-place"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span id="hero-place">Eisenerz, Austria</span></div>
+          <div class="hero-bottom">
+            <div><div class="count-label">Gate drops in</div><div class="countdown" id="countdown"><span>02</span> D&nbsp; <span>14</span> H&nbsp; <span>38</span> M</div></div>
+            <button class="watch-cta" id="watch-button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Where to watch</button>
+          </div>
+        </div>
+      </section>
+      <div class="stats-row">
+        <div class="stat"><small>Race day</small><strong id="hero-date">Sunday, May 31</strong></div>
+        <div class="stat"><small>First gate</small><strong id="hero-time">6:00 AM</strong></div>
+        <div class="stat"><small>Series</small><strong><span class="series-badge" id="hero-series">Hard Enduro</span></strong></div>
+      </div>
+
+      <section>
+        <div class="section-head"><div><h2>Coming up</h2><p>Live events and highlights, in your device’s time.</p></div><button class="view-all" id="favorites-button">☆ Favorites</button></div>
+        <div class="series-picker" aria-label="Choose followed series">
+          <label class="series-choice"><input type="checkbox" checked data-series="Hard Enduro">Hard enduro</label><label class="series-choice"><input type="checkbox" checked data-series="EnduroCross">EnduroCross</label><label class="series-choice"><input type="checkbox" checked data-series="AMA Supercross">AMA Supercross</label><label class="series-choice"><input type="checkbox" checked data-series="Pro Motocross">Pro motocross</label><label class="series-choice"><input type="checkbox" checked data-series="SMX Playoffs">SMX playoffs</label>
+        </div>
+        <div class="filters" role="tablist" aria-label="Filter events">
+          <button class="filter active" data-filter="All">All events</button><button class="filter" data-filter="Hard Enduro">Hard enduro</button><button class="filter" data-filter="EnduroCross">EnduroCross</button><button class="filter" data-filter="AMA Supercross">Supercross</button><button class="filter" data-filter="Pro Motocross">Pro motocross</button><button class="filter" data-filter="SMX Playoffs">SMX playoffs</button><button class="filter" data-filter="Hidden">Hidden</button>
+        </div>
+        <div class="event-list" id="event-list"></div>
+        <div style="display:flex;justify-content:space-between;gap:12px;margin-top:14px"><button class="text-action" id="settings-button">Reminder settings</button><button class="text-action" id="show-hidden-button">Show hidden events</button></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="page-panel" id="watch-panel" role="dialog" aria-modal="true" aria-labelledby="watch-heading"><div class="panel-sheet"><div class="panel-head"><h2 id="watch-heading">Where to watch</h2><button class="panel-close" data-close="watch-panel" aria-label="Close">×</button></div><div id="watch-content"></div></div></div>
+  <div class="page-panel" id="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-heading"><div class="panel-sheet"><div class="panel-head"><h2 id="settings-heading">Your settings</h2><button class="panel-close" data-close="settings-panel" aria-label="Close">×</button></div><div class="panel-section"><h3>First gate reminder</h3><p>Choose how long before the first gate you want a reminder. Device time zone is used automatically.</p><label class="setting-row"><span>Remind me</span><select id="reminder-select"><option value="0.25">15 minutes before</option><option value="0.5">30 minutes before</option><option value="1">1 hour before</option><option value="2">2 hours before</option><option value="24">1 day before</option></select></label></div></div></div>
+  <script>
+    let events = [
+      {id:'hewc-roof-of-africa-2026',name:'Roof of Africa — Main Race',round:'FIM Hard Enduro World Championship · Round 6',series:'Hard Enduro',date:'2026-11-21T08:00:00+02:00',firstGate:'2026-11-21T08:00:00+02:00',where:'Maseru, Lesotho',status:'live',provider:'FIM Hard Enduro YouTube',watchUrl:'https://fim-hardenduro.com/',highlightsUrl:'https://www.youtube.com/@FIMHardEnduro',priority:0},
+      {id:'endurocross-everett-2026',name:'EnduroCross — Everett',round:'AMA EnduroCross · Round 3',series:'EnduroCross',date:'2026-10-25T02:00:00-05:00',firstGate:'2026-10-25T02:00:00-05:00',where:'Angel of the Winds Arena · Everett, WA',status:'live',provider:'EnduroCross TV',watchUrl:'https://endurocross.com/tv/',highlightsUrl:'https://www.youtube.com/@EnduroCross',priority:0}
+    ];
+    const hidden=new Set(JSON.parse(localStorage.getItem('gatedrop-hidden')||'[]'));
+    const saved=new Set(JSON.parse(localStorage.getItem('gatedrop-favorites')||'["Erzbergrodeo — Main Race","EnduroCross Championship"]'));
+    let activeFilter='All', favoritesOnly=false, showHidden=false, selectedEvent=events[0], reminderHours=Number(localStorage.getItem('gatedrop-reminder-hours')||1);
+    const list=document.getElementById('event-list'), toast=document.getElementById('toast');
+    function localTime(date){return new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(new Date(date))}
+    function getUpcoming(){return events.filter(e=>new Date(e.firstGate)>Date.now()&&!hidden.has(e.id)).sort((a,b)=>a.priority-b.priority||new Date(a.firstGate)-new Date(b.firstGate))}
+    function eventDateParts(event){const date=new Date(event.firstGate);return {day:new Intl.DateTimeFormat(undefined,{day:'2-digit'}).format(date),month:new Intl.DateTimeFormat(undefined,{month:'short'}).format(date).toUpperCase(),dow:new Intl.DateTimeFormat(undefined,{weekday:'short'}).format(date).toUpperCase()}}
+    function render(){
+      const followed=new Set([...document.querySelectorAll('[data-series]:checked')].map(input=>input.dataset.series));
+      const visible=events.filter(e=>(activeFilter==='Hidden'?hidden.has(e.name):(activeFilter==='All'||e.series===activeFilter)&&followed.has(e.series)&&(!favoritesOnly||saved.has(e.name))&&(showHidden||!hidden.has(e.name)))).sort((a,b)=>a.priority-b.priority||new Date(a.firstGate)-new Date(b.firstGate));
+      list.innerHTML=visible.length?visible.map((e,index)=>{const parts=eventDateParts(e);return `<details class="event-row" ${index===0?'open':''} data-event="${e.id}"><summary style="display:contents;list-style:none"><div class="date-box"><b>${parts.day}</b><span>${parts.dow} · ${parts.month}</span></div><div><div class="event-name">${e.name}</div><div class="event-meta"><span>${e.series}</span><i class="dot"></i><span>${e.where}</span></div></div><div class="event-badges"><span class="discipline">${e.series}</span><span class="availability ${e.status}">${e.status==='live'?'● LIVESTREAM':'▶ HIGHLIGHTS'}</span></div><svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary><div class="event-detail"><div><span class="detail-label">First gate · your time</span>${localTime(e.firstGate)}</div><div><span class="detail-label">Event time · your time</span>${localTime(e.date)}</div><div><span class="detail-label">Watch / coverage</span><a href="${e.watchUrl}" target="_blank" rel="noopener">${e.provider} ↗</a></div><div><span class="detail-label">Highlights</span><a href="${e.highlightsUrl}" target="_blank" rel="noopener">Find on YouTube ↗</a></div><div><span class="detail-label">Series</span>${e.series}</div><div><span class="detail-label">Your list</span><button class="text-action" data-fav="${e.id}">${saved.has(e.id)?'★ Remove favorite':'☆ Add favorite'}</button> · <button class="text-action" data-hide="${e.id}">${hidden.has(e.id)?'Show event':'Hide event'}</button></div></div></details>`}).join(''):'<div class="empty">No events match these filters.</div>';
+    }
+    function updateHero(){const upcoming=getUpcoming();if(!upcoming.length){document.querySelector('.status').innerHTML='<i></i> Schedule coming soon';document.getElementById('hero-kicker').textContent='Follow your favorite series';document.getElementById('hero-title').textContent='Race day is on the way';document.getElementById('hero-place').textContent='Upcoming events will appear here';document.getElementById('hero-date').textContent='—';document.getElementById('hero-time').textContent='—';document.getElementById('hero-series').textContent='Schedule';document.getElementById('countdown').textContent='—';return}if(!upcoming.includes(selectedEvent))selectedEvent=upcoming[0];const event=selectedEvent;document.getElementById('hero-kicker').textContent=`${event.series} · ${event.round}`;document.getElementById('hero-title').innerHTML=event.name.replace(' — ','<br>');document.getElementById('hero-place').textContent=event.where;document.getElementById('hero-date').textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',month:'short',day:'numeric'}).format(new Date(event.firstGate));document.getElementById('hero-time').textContent=localTime(event.firstGate);document.getElementById('hero-series').textContent=event.series;document.querySelector('.status').innerHTML=`<i></i> Next up · ${event.status==='live'?'Livestream':'YouTube highlights'}`;updateCountdown()}
+    function updateCountdown(){const target=new Date(selectedEvent.firstGate);const diff=Math.max(0,target-Date.now());const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000);document.getElementById('countdown').innerHTML=`<span>${String(d).padStart(2,'0')}</span> D&nbsp; <span>${String(h).padStart(2,'0')}</span> H&nbsp; <span>${String(m).padStart(2,'0')}</span> M`;}
+    function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove('show'),2200)}
+    document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>{document.querySelector('.filter.active').classList.remove('active');button.classList.add('active');activeFilter=button.dataset.filter;render()}));
+    list.addEventListener('click',event=>{const fav=event.target.closest('[data-fav]'),hide=event.target.closest('[data-hide]');if(fav){event.preventDefault();event.stopPropagation();const id=fav.dataset.fav;saved.has(id)?saved.delete(id):saved.add(id);localStorage.setItem('gatedrop-favorites',JSON.stringify([...saved]));render();return}if(hide){event.preventDefault();event.stopPropagation();const id=hide.dataset.hide;hidden.has(id)?hidden.delete(id):hidden.add(id);localStorage.setItem('gatedrop-hidden',JSON.stringify([...hidden]));render();showToast(hidden.has(id)?'Event hidden':'Event restored');updateHero();return}const detail=event.target.closest('[data-event]');if(detail){selectedEvent=events.find(e=>e.id===detail.dataset.event)||getUpcoming()[0];updateHero()}});
+    document.getElementById('watch-button').addEventListener('click',()=>{const e=selectedEvent;document.getElementById('watch-content').innerHTML=`<div class="panel-section"><h3>${e.name}</h3><p>${e.status==='live'?'Livestream':'Highlights available'} · ${e.provider}</p><a class="provider-link" href="${e.watchUrl}" target="_blank" rel="noopener">${e.status==='live'?'Open streaming service':'Find coverage'} <span>Open ↗</span></a><a class="provider-link" href="${e.highlightsUrl}" target="_blank" rel="noopener">YouTube highlights <span>Open ↗</span></a></div><div class="panel-section"><h3>More services</h3>${[...new Set(events.map(item=>item.provider))].map(provider=>`<a class="provider-link" href="${events.find(item=>item.provider===provider).watchUrl}" target="_blank" rel="noopener">${provider}<span>View ↗</span></a>`).join('')}</div>`;document.getElementById('watch-panel').classList.add('open')});
+    document.getElementById('favorites-button').addEventListener('click',()=>{favoritesOnly=!favoritesOnly;document.getElementById('favorites-button').textContent=favoritesOnly?'★ Favorites on':'☆ Favorites';render()});
+    document.getElementById('settings-button').addEventListener('click',()=>document.getElementById('settings-panel').classList.add('open'));
+    document.getElementById('show-hidden-button').addEventListener('click',()=>{showHidden=!showHidden;document.getElementById('show-hidden-button').textContent=showHidden?'Hide hidden events':'Show hidden events';render()});
+    document.getElementById('reminder-select').value=String(reminderHours);document.getElementById('reminder-select').addEventListener('change',event=>{reminderHours=Number(event.target.value);localStorage.setItem('gatedrop-reminder-hours',String(reminderHours));showToast('Reminder preference saved')});
+    document.querySelectorAll('[data-series]').forEach(input=>input.addEventListener('change',render));
+    document.querySelectorAll('[data-close]').forEach(button=>button.addEventListener('click',()=>button.closest('.page-panel').classList.remove('open')));
+    document.querySelectorAll('.page-panel').forEach(panel=>panel.addEventListener('click',event=>{if(event.target===panel)panel.classList.remove('open')}));
+    async function loadEventFeed(){try{const response=await fetch('data/events.json',{cache:'no-store'});if(!response.ok)throw new Error('Event feed unavailable');const feed=await response.json();if(!Array.isArray(feed.events)||!feed.events.length)throw new Error('Event feed is empty');events=feed.events;document.getElementById('feed-status').textContent=`Updated ${new Intl.DateTimeFormat(undefined,{month:'short',day:'numeric'}).format(new Date(feed.updatedAt))}`}catch{document.getElementById('feed-status').textContent='Local preview schedule'}render();updateHero()}
+    loadEventFeed();setInterval(()=>{if(new Date(selectedEvent.firstGate)<=Date.now())updateHero();else updateCountdown()},60000);
+  </script>
+</body>
+</html>

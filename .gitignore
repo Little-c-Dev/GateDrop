@@ -1,0 +1,11 @@
+# Local Android tooling and build output
+android-tooling/
+android-studio-installer.exe
+android/.gradle/
+android/build/
+android/app/build/
+
+# Local editor files
+.idea/
+*.iml
+

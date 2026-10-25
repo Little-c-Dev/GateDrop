@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'app.gatedrop'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'app.gatedrop'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    sourceSets {
+        main {
+            assets.srcDir(layout.buildDirectory.dir('generated/assets/web'))
+        }
+    }
+}
+
+def webRoot = file('../..')
+tasks.register('syncWebAssets', Copy) {
+    from(webRoot) {
+        include 'mobile.html', 'app-data.js'
+    }
+    from(new File(webRoot, 'data')) {
+        include 'events.json'
+        into 'data'
+    }
+    into layout.buildDirectory.dir('generated/assets/web')
+    rename 'mobile.html', 'index.html'
+}
+
+afterEvaluate {
+    tasks.named('mergeDebugAssets').configure { dependsOn(tasks.named('syncWebAssets')) }
+    tasks.named('mergeReleaseAssets').configure { dependsOn(tasks.named('syncWebAssets')) }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.webkit:webkit:1.12.1'
+}

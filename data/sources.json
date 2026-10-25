@@ -1,0 +1,49 @@
+{
+  "sources": [
+    {
+      "id": "fim-hard-enduro",
+      "series": "Hard Enduro",
+      "calendarUrl": "https://fim-hardenduro.com/",
+      "watchUrl": "https://fim-hardenduro.com/",
+      "highlightsUrl": "https://www.youtube.com/@FIMHardEnduro",
+      "priority": 0,
+      "mode": "manual-review"
+    },
+    {
+      "id": "endurocross",
+      "series": "EnduroCross",
+      "calendarUrl": "https://endurocross.com/2026-schedule/",
+      "watchUrl": "https://endurocross.com/tv/",
+      "highlightsUrl": "https://www.youtube.com/@EnduroCross",
+      "priority": 0,
+      "mode": "json-ld"
+    },
+    {
+      "id": "supermotocross",
+      "series": "AMA Supercross",
+      "calendarUrl": "https://www.supermotocross.com/",
+      "watchUrl": "https://www.peacocktv.com/sports/supermotocross",
+      "highlightsUrl": "https://www.youtube.com/@SupercrossLive",
+      "priority": 1,
+      "mode": "manual-review"
+    },
+    {
+      "id": "pro-motocross",
+      "series": "Pro Motocross",
+      "calendarUrl": "https://promotocross.com/",
+      "watchUrl": "https://promotocross.com/watch",
+      "highlightsUrl": "https://www.youtube.com/@ProMotocross",
+      "priority": 1,
+      "mode": "manual-review"
+    },
+    {
+      "id": "smx-playoffs",
+      "series": "SMX Playoffs",
+      "calendarUrl": "https://www.supermotocross.com/",
+      "watchUrl": "https://www.peacocktv.com/sports/supermotocross",
+      "highlightsUrl": "https://www.youtube.com/@SuperMotocross",
+      "priority": 1,
+      "mode": "manual-review"
+    }
+  ]
+}

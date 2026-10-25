@@ -1,0 +1,32 @@
+window.GateDrop = (() => {
+  // Set this before loading the script when the schedule is published online.
+  // The packaged file remains available when the device is offline.
+  const remoteFeedUrl = window.GATE_DROP_FEED_URL || '';
+  const fallback = [
+    {id:'hewc-hixpania-2026',name:'24MX Hixpania Hard Enduro',round:'FIM Hard Enduro World Championship · Final round',series:'Hard Enduro',date:'2026-10-25T12:00:00+02:00',firstGate:'2026-10-23T17:00:00+02:00',liveStart:'2026-10-23T17:00:00+02:00',liveEnd:'2026-10-25T14:30:00+02:00',where:'Aguilar de Campoo, Spain',status:'live',provider:'FIM Hard Enduro YouTube',watchUrl:'https://fim-hardenduro.com/',highlightsUrl:'https://www.youtube.com/@FIMHardEnduro',imageUrl:'https://hixpania.es/wp-content/uploads/2025/04/54097720953_e14ff6ccb0_k-1024x683.webp',priority:0},
+    {id:'endurocross-everett-2026',name:'EnduroCross — Everett',round:'AMA EnduroCross · Round 3',series:'EnduroCross',date:'2026-10-25T02:00:00-05:00',firstGate:'2026-10-25T02:00:00-05:00',liveStart:'2026-10-25T02:00:00-05:00',liveEnd:'2026-10-25T06:50:00-05:00',where:'Angel of the Winds Arena · Everett, WA',status:'live',provider:'EnduroCross TV',watchUrl:'https://endurocross.com/tv/',highlightsUrl:'https://www.youtube.com/@EnduroCross',imageUrl:'https://endurocross.com/wp-content/uploads/2024/06/EX-FB-RD-3EVENT-2026.png',priority:0}
+  ];
+  const date = value => new Date(value);
+  const upcoming = events => events.filter(event => date(event.firstGate) > Date.now()).sort((a,b) => a.priority - b.priority || date(a.firstGate) - date(b.firstGate));
+  const time = value => new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(date(value));
+  const day = value => new Intl.DateTimeFormat(undefined,{weekday:'short',month:'short',day:'numeric'}).format(date(value));
+  const monthDay = value => new Intl.DateTimeFormat(undefined,{month:'short',day:'numeric'}).format(date(value));
+  const countdown = value => { const diff=Math.max(0,date(value)-Date.now()); return {days:Math.floor(diff/86400000),hours:Math.floor(diff%86400000/3600000),minutes:Math.floor(diff%3600000/60000)} };
+  async function getFeed(url) {
+    const response=await fetch(url,{cache:'no-store'});
+    if(!response.ok) throw new Error();
+    const feed=await response.json();
+    if(!Array.isArray(feed.events)) throw new Error();
+    return feed;
+  }
+  async function load() {
+    if(remoteFeedUrl) {
+      try { const feed=await getFeed(remoteFeedUrl); return {events:upcoming(feed.events),updatedAt:feed.updatedAt,remote:true}; }
+      catch { /* Keep the installed schedule available offline. */ }
+    }
+    try { const feed=await getFeed('data/events.json'); return {events:upcoming(feed.events),updatedAt:feed.updatedAt,remote:false}; }
+    catch { return {events:upcoming(fallback),updatedAt:null,remote:false}; }
+  }
+  const liveNow = events => events.some(event => event.liveStart && event.liveEnd && date(event.liveStart) <= Date.now() && Date.now() <= date(event.liveEnd));
+  return {load,time,day,monthDay,countdown,liveNow};
+})();
