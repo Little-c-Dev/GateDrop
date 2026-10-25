@@ -39,6 +39,14 @@ afterEvaluate {
     tasks.named('mergeReleaseAssets').configure { dependsOn(tasks.named('syncWebAssets')) }
 }
 
+androidComponents {
+    onVariants(selector().all()) { variant ->
+        variant.outputs.forEach { output ->
+            output.outputFileName.set("GateDrop v${android.defaultConfig.versionName}.apk")
+        }
+    }
+}
+
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.webkit:webkit:1.12.1'
