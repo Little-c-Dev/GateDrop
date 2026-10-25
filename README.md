@@ -4,9 +4,8 @@ This project publishes `data/events.json`, the small schedule feed used by the G
 
 ## Publishing updates
 
-1. Create a public GitHub repository and upload this project.
-2. Enable GitHub Pages for the repository's default branch.
-3. Set the published `events.json` address in `mobile.html`, `desktop.html`, and the Android wrapper before building the release APK.
+1. Enable GitHub Pages for this repository's `main` branch.
+2. Publish changes to `data/events.json`.
 
 The app first requests the published feed. It uses its installed copy if the device is offline or the feed cannot be reached.
 

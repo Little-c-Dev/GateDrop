@@ -1,7 +1,6 @@
 window.GateDrop = (() => {
-  // Set this before loading the script when the schedule is published online.
   // The packaged file remains available when the device is offline.
-  const remoteFeedUrl = window.GATE_DROP_FEED_URL || '';
+  const remoteFeedUrl = window.GATE_DROP_FEED_URL || 'https://little-c-dev.github.io/GateDrop/data/events.json';
   const fallback = [
     {id:'hewc-hixpania-2026',name:'24MX Hixpania Hard Enduro',round:'FIM Hard Enduro World Championship · Final round',series:'Hard Enduro',date:'2026-10-25T12:00:00+02:00',firstGate:'2026-10-23T17:00:00+02:00',liveStart:'2026-10-23T17:00:00+02:00',liveEnd:'2026-10-25T14:30:00+02:00',where:'Aguilar de Campoo, Spain',status:'live',provider:'FIM Hard Enduro YouTube',watchUrl:'https://fim-hardenduro.com/',highlightsUrl:'https://www.youtube.com/@FIMHardEnduro',imageUrl:'https://hixpania.es/wp-content/uploads/2025/04/54097720953_e14ff6ccb0_k-1024x683.webp',priority:0},
     {id:'endurocross-everett-2026',name:'EnduroCross — Everett',round:'AMA EnduroCross · Round 3',series:'EnduroCross',date:'2026-10-25T02:00:00-05:00',firstGate:'2026-10-25T02:00:00-05:00',liveStart:'2026-10-25T02:00:00-05:00',liveEnd:'2026-10-25T06:50:00-05:00',where:'Angel of the Winds Arena · Everett, WA',status:'live',provider:'EnduroCross TV',watchUrl:'https://endurocross.com/tv/',highlightsUrl:'https://www.youtube.com/@EnduroCross',imageUrl:'https://endurocross.com/wp-content/uploads/2024/06/EX-FB-RD-3EVENT-2026.png',priority:0}
