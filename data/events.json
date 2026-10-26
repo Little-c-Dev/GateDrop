@@ -1,25 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-25T20:56:50.526Z",
+  "updatedAt": "2026-10-26T04:56:29.077Z",
   "events": [
-    {
-      "id": "endurocross-everett-wa-10-24-26-2026-10-24t19-00-00-07-00",
-      "name": "Everett, WA - 10.24.26",
-      "round": "EnduroCross",
-      "series": "EnduroCross",
-      "date": "2026-10-24T19:00:00-07:00",
-      "firstGate": "2026-10-24T19:00:00-07:00",
-      "where": "Angel of the Winds Arena",
-      "status": "live",
-      "provider": "EnduroCross TV",
-      "watchUrl": "https://endurocross.com/tv/",
-      "highlightsUrl": "https://www.youtube.com/@EnduroCross",
-      "priority": 0,
-      "sourceUrl": "https://endurocross.com/events/2026-rd3/",
-      "liveStart": "2026-10-24T19:00:00-07:00",
-      "liveEnd": "2026-10-25T07:00:00.000Z",
-      "imageUrl": "https://endurocross.com/wp-content/uploads/2024/06/EX-FB-RD-3EVENT-2026.png"
-    },
     {
       "id": "endurocross-salt-lake-city-ut-11-7-26-2026-11-07t19-00-00-07-00",
       "name": "Salt Lake City, UT - 11.7.26",
