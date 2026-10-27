@@ -1,7 +1,24 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-27T00:48:04.399Z",
+  "updatedAt": "2026-10-27T00:54:07.212Z",
   "events": [
+    {
+      "id": "gncc-racing-buckwheat-100-2026-11-06t09-00-00-05-00",
+      "name": "Buckwheat 100",
+      "round": "Round 13",
+      "series": "GNCC Racing",
+      "date": "2026-11-06T09:00:00-05:00",
+      "firstGate": "2026-11-06T09:00:00-05:00",
+      "where": "CJ Raceway · Newburg, WV",
+      "status": "live",
+      "provider": "RacerTV",
+      "watchUrl": "https://gnccracing.com/broadcasts",
+      "highlightsUrl": "https://www.youtube.com/@GNCCRacing",
+      "priority": 1,
+      "sourceUrl": "https://gnccracing.com/event/rd-13-cj-raceway",
+      "liveStart": "2026-11-06T09:00:00-05:00",
+      "liveEnd": "2026-11-08T17:00:00-05:00"
+    },
     {
       "id": "endurocross-salt-lake-city-ut-11-7-26-2026-11-07t19-00-00-07-00",
       "name": "Salt Lake City, UT - 11.7.26",
@@ -55,23 +72,6 @@
       "liveStart": "2026-11-14T19:00:00-07:00",
       "liveEnd": "2026-11-15T07:00:00.000Z",
       "imageUrl": "https://endurocross.com/wp-content/uploads/2024/06/1.png"
-    },
-    {
-      "id": "gncc-racing-buckwheat-100-2026-11-06t09-00-00-05-00",
-      "name": "Buckwheat 100",
-      "round": "Round 13",
-      "series": "GNCC Racing",
-      "date": "2026-11-06T09:00:00-05:00",
-      "firstGate": "2026-11-06T09:00:00-05:00",
-      "where": "CJ Raceway · Newburg, WV",
-      "status": "live",
-      "provider": "RacerTV",
-      "watchUrl": "https://gnccracing.com/broadcasts",
-      "highlightsUrl": "https://www.youtube.com/@GNCCRacing",
-      "priority": 1,
-      "sourceUrl": "https://gnccracing.com/event/rd-13-cj-raceway",
-      "liveStart": "2026-11-06T09:00:00-05:00",
-      "liveEnd": "2026-11-08T17:00:00-05:00"
     },
     {
       "id": "fim-superenduro-fim-superenduro-gp-of-poland-2026-12-05t12-00-00-05-00",

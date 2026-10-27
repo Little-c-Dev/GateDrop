@@ -24,7 +24,7 @@ window.GateDrop = (() => {
     {id:'endurocross-everett-2026',name:'EnduroCross — Everett',round:'AMA EnduroCross · Round 3',series:'EnduroCross',date:'2026-10-25T02:00:00-05:00',firstGate:'2026-10-25T02:00:00-05:00',liveStart:'2026-10-25T02:00:00-05:00',liveEnd:'2026-10-25T06:50:00-05:00',where:'Angel of the Winds Arena · Everett, WA',status:'live',provider:'EnduroCross TV',watchUrl:'https://endurocross.com/tv/',highlightsUrl:'https://www.youtube.com/@EnduroCross',imageUrl:'https://endurocross.com/wp-content/uploads/2024/06/EX-FB-RD-3EVENT-2026.png',priority:0}
   ];
   const date = value => new Date(value);
-  const upcoming = events => events.filter(event => date(event.firstGate) > Date.now()).sort((a,b) => a.priority - b.priority || date(a.firstGate) - date(b.firstGate));
+  const upcoming = events => events.filter(event => date(event.firstGate) > Date.now()).sort((a,b) => date(a.firstGate) - date(b.firstGate) || a.priority - b.priority);
   const time = value => new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(date(value));
   const day = value => new Intl.DateTimeFormat(undefined,{weekday:'short',month:'short',day:'numeric'}).format(date(value));
   const monthDay = value => new Intl.DateTimeFormat(undefined,{month:'short',day:'numeric'}).format(date(value));

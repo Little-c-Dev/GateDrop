@@ -35,7 +35,7 @@ for (const source of sources) { try { automatic.push(...await loaders[source.mod
 const refreshedSeries = new Set(automatic.map(item => item.series));
 const manual = existing.events.filter(item => !refreshedSeries.has(item.series));
 const events = [...manual,...automatic].map(item => ({...item, date:normalizeOffset(item.date), firstGate:normalizeOffset(item.firstGate), liveStart:item.liveStart ? normalizeOffset(item.liveStart) : undefined, liveEnd:item.liveEnd ? normalizeOffset(item.liveEnd) : undefined})).filter((item,index,list) => list.findIndex(other => other.id === item.id) === index).filter(item => new Date(item.firstGate) > new Date(Date.now() - 86400000));
-events.sort((a,b) => a.priority - b.priority || new Date(a.firstGate) - new Date(b.firstGate));
+events.sort((a,b) => new Date(a.firstGate) - new Date(b.firstGate) || a.priority - b.priority);
 const feed = JSON.stringify({schemaVersion:1,updatedAt:new Date().toISOString(),events},null,2)+'\n';
 await Promise.all([writeFile(new URL('../data/events.json',import.meta.url),feed),writeFile(new URL('../events.json',import.meta.url),feed)]);
 console.log(`Wrote ${events.length} upcoming events.`);
