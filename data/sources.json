@@ -19,6 +19,26 @@
       "mode": "json-ld"
     },
     {
+      "id": "gncc-racing",
+      "series": "GNCC Racing",
+      "calendarUrl": "https://gnccracing.com/events",
+      "watchUrl": "https://gnccracing.com/broadcasts",
+      "highlightsUrl": "https://www.youtube.com/@GNCCRacing",
+      "provider": "RacerTV",
+      "priority": 1,
+      "mode": "gncc-schedule"
+    },
+    {
+      "id": "fim-superenduro",
+      "series": "SuperEnduro",
+      "calendarUrl": "https://superenduro.org/",
+      "watchUrl": "https://superenduro.org/",
+      "highlightsUrl": "https://www.youtube.com/@FIM",
+      "provider": "FIM SuperEnduro",
+      "priority": 1,
+      "mode": "super-enduro-schedule"
+    },
+    {
       "id": "supermotocross",
       "series": "AMA Supercross",
       "calendarUrl": "https://www.supermotocross.com/schedule/",

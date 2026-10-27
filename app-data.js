@@ -4,9 +4,20 @@ window.GateDrop = (() => {
   const schedules = {
     'Hard Enduro':'https://fim-hardenduro.com/calendar',
     'EnduroCross':'https://endurocross.com/2026-schedule/',
+    'GNCC Racing':'https://gnccracing.com/events',
+    'SuperEnduro':'https://superenduro.org/',
     'AMA Supercross':'https://www.supermotocross.com/schedule/',
     'Pro Motocross':'https://www.supermotocross.com/schedule/',
     'SMX Playoffs':'https://www.supermotocross.com/schedule/'
+  };
+  const seriesTitles = {
+    'Hard Enduro':'FIM Hard Enduro World Championship',
+    'EnduroCross':'AMA EnduroCross Championship',
+    'GNCC Racing':'Progressive Grand National Cross Country Series',
+    'SuperEnduro':'FIM SuperEnduro World Championship',
+    'AMA Supercross':'Monster Energy AMA Supercross Championship',
+    'Pro Motocross':'Pro Motocross Championship',
+    'SMX Playoffs':'SuperMotocross World Championship Playoffs'
   };
   const fallback = [
     {id:'hewc-hixpania-2026',name:'24MX Hixpania Hard Enduro',round:'FIM Hard Enduro World Championship · Final round',series:'Hard Enduro',date:'2026-10-25T12:00:00+02:00',firstGate:'2026-10-23T17:00:00+02:00',liveStart:'2026-10-23T17:00:00+02:00',liveEnd:'2026-10-25T14:30:00+02:00',where:'Aguilar de Campoo, Spain',status:'live',provider:'FIM Hard Enduro YouTube',watchUrl:'https://fim-hardenduro.com/',highlightsUrl:'https://www.youtube.com/@FIMHardEnduro',imageUrl:'https://hixpania.es/wp-content/uploads/2025/04/54097720953_e14ff6ccb0_k-1024x683.webp',priority:0},
@@ -36,5 +47,6 @@ window.GateDrop = (() => {
   const isLive = event => event.liveStart && event.liveEnd && date(event.liveStart) <= Date.now() && Date.now() <= date(event.liveEnd);
   const liveNow = events => events.some(isLive);
   const scheduleUrl = series => schedules[series] || 'https://www.supermotocross.com/schedule/';
-  return {load,time,day,monthDay,countdown,liveNow,isLive,scheduleUrl};
+  const seriesTitle = series => seriesTitles[series] || series;
+  return {load,time,day,monthDay,countdown,liveNow,isLive,scheduleUrl,seriesTitle};
 })();

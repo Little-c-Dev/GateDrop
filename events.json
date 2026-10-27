@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-26T22:44:56.910Z",
+  "updatedAt": "2026-10-27T00:48:04.399Z",
   "events": [
     {
       "id": "endurocross-salt-lake-city-ut-11-7-26-2026-11-07t19-00-00-07-00",
@@ -57,6 +57,55 @@
       "imageUrl": "https://endurocross.com/wp-content/uploads/2024/06/1.png"
     },
     {
+      "id": "gncc-racing-buckwheat-100-2026-11-06t09-00-00-05-00",
+      "name": "Buckwheat 100",
+      "round": "Round 13",
+      "series": "GNCC Racing",
+      "date": "2026-11-06T09:00:00-05:00",
+      "firstGate": "2026-11-06T09:00:00-05:00",
+      "where": "CJ Raceway · Newburg, WV",
+      "status": "live",
+      "provider": "RacerTV",
+      "watchUrl": "https://gnccracing.com/broadcasts",
+      "highlightsUrl": "https://www.youtube.com/@GNCCRacing",
+      "priority": 1,
+      "sourceUrl": "https://gnccracing.com/event/rd-13-cj-raceway",
+      "liveStart": "2026-11-06T09:00:00-05:00",
+      "liveEnd": "2026-11-08T17:00:00-05:00"
+    },
+    {
+      "id": "fim-superenduro-fim-superenduro-gp-of-poland-2026-12-05t12-00-00-05-00",
+      "name": "FIM SuperEnduro GP of Poland",
+      "round": "Round 1",
+      "series": "SuperEnduro",
+      "date": "2026-12-05T12:00:00-05:00",
+      "firstGate": "2026-12-05T12:00:00-05:00",
+      "where": "Poland, Gliwice",
+      "status": "live",
+      "provider": "FIM SuperEnduro",
+      "watchUrl": "https://superenduro.org/",
+      "highlightsUrl": "https://www.youtube.com/@FIM",
+      "priority": 1,
+      "sourceUrl": "https://superenduro.org/",
+      "timeTBA": true
+    },
+    {
+      "id": "fim-superenduro-fim-superenduro-gp-of-germany-2027-01-09t12-00-00-05-00",
+      "name": "FIM SuperEnduro GP of Germany",
+      "round": "Round 2",
+      "series": "SuperEnduro",
+      "date": "2027-01-09T12:00:00-05:00",
+      "firstGate": "2027-01-09T12:00:00-05:00",
+      "where": "Germany, Riesa",
+      "status": "live",
+      "provider": "FIM SuperEnduro",
+      "watchUrl": "https://superenduro.org/",
+      "highlightsUrl": "https://www.youtube.com/@FIM",
+      "priority": 1,
+      "sourceUrl": "https://superenduro.org/",
+      "timeTBA": true
+    },
+    {
       "id": "supermotocross-ama-supercross-round-1-2027-01-09t16-00-00-08-00",
       "name": "AMA Supercross Round 1",
       "round": "Round 1",
@@ -87,6 +136,22 @@
       "sourceUrl": "https://www.supermotocross.com/schedule/"
     },
     {
+      "id": "fim-superenduro-fim-superenduro-gp-of-spain-2027-01-23t12-00-00-05-00",
+      "name": "FIM SuperEnduro GP of Spain",
+      "round": "Round 3",
+      "series": "SuperEnduro",
+      "date": "2027-01-23T12:00:00-05:00",
+      "firstGate": "2027-01-23T12:00:00-05:00",
+      "where": "Spain, Bilbao",
+      "status": "live",
+      "provider": "FIM SuperEnduro",
+      "watchUrl": "https://superenduro.org/",
+      "highlightsUrl": "https://www.youtube.com/@FIM",
+      "priority": 1,
+      "sourceUrl": "https://superenduro.org/",
+      "timeTBA": true
+    },
+    {
       "id": "supermotocross-ama-supercross-round-3-2027-01-23t16-00-00-08-00",
       "name": "AMA Supercross Round 3",
       "round": "Round 3",
@@ -102,6 +167,22 @@
       "sourceUrl": "https://www.supermotocross.com/schedule/"
     },
     {
+      "id": "fim-superenduro-fim-superenduro-gp-of-serbia-2027-01-30t12-00-00-05-00",
+      "name": "FIM SuperEnduro GP of Serbia",
+      "round": "Round 4",
+      "series": "SuperEnduro",
+      "date": "2027-01-30T12:00:00-05:00",
+      "firstGate": "2027-01-30T12:00:00-05:00",
+      "where": "Serbia, Belgrade",
+      "status": "live",
+      "provider": "FIM SuperEnduro",
+      "watchUrl": "https://superenduro.org/",
+      "highlightsUrl": "https://www.youtube.com/@FIM",
+      "priority": 1,
+      "sourceUrl": "https://superenduro.org/",
+      "timeTBA": true
+    },
+    {
       "id": "supermotocross-ama-supercross-round-4-2027-01-30t18-00-00-06-00",
       "name": "AMA Supercross Round 4",
       "round": "Round 4",
@@ -115,6 +196,22 @@
       "highlightsUrl": "https://www.youtube.com/@SupercrossLive",
       "priority": 1,
       "sourceUrl": "https://www.supermotocross.com/schedule/"
+    },
+    {
+      "id": "fim-superenduro-fim-superenduro-gp-of-hungary-2027-02-06t12-00-00-05-00",
+      "name": "FIM SuperEnduro GP of Hungary",
+      "round": "Round 5",
+      "series": "SuperEnduro",
+      "date": "2027-02-06T12:00:00-05:00",
+      "firstGate": "2027-02-06T12:00:00-05:00",
+      "where": "Hungary, Budapest",
+      "status": "live",
+      "provider": "FIM SuperEnduro",
+      "watchUrl": "https://superenduro.org/",
+      "highlightsUrl": "https://www.youtube.com/@FIM",
+      "priority": 1,
+      "sourceUrl": "https://superenduro.org/",
+      "timeTBA": true
     },
     {
       "id": "supermotocross-ama-supercross-round-5-2027-02-06t19-00-00-05-00",
@@ -162,6 +259,22 @@
       "sourceUrl": "https://www.supermotocross.com/schedule/"
     },
     {
+      "id": "fim-superenduro-fim-superenduro-gp-of-france-2027-02-27t12-00-00-05-00",
+      "name": "FIM SuperEnduro GP of France",
+      "round": "Round 6",
+      "series": "SuperEnduro",
+      "date": "2027-02-27T12:00:00-05:00",
+      "firstGate": "2027-02-27T12:00:00-05:00",
+      "where": "France, Greater Paris",
+      "status": "live",
+      "provider": "FIM SuperEnduro",
+      "watchUrl": "https://superenduro.org/",
+      "highlightsUrl": "https://www.youtube.com/@FIM",
+      "priority": 1,
+      "sourceUrl": "https://superenduro.org/",
+      "timeTBA": true
+    },
+    {
       "id": "supermotocross-ama-supercross-round-8-2027-02-27t18-00-00-06-00",
       "name": "AMA Supercross Round 8",
       "round": "Round 8",
@@ -175,6 +288,22 @@
       "highlightsUrl": "https://www.youtube.com/@SupercrossLive",
       "priority": 1,
       "sourceUrl": "https://www.supermotocross.com/schedule/"
+    },
+    {
+      "id": "fim-superenduro-fim-superenduro-gp-of-united-kingdom-2027-03-06t12-00-00-05-00",
+      "name": "FIM SuperEnduro GP of United Kingdom",
+      "round": "Round 7",
+      "series": "SuperEnduro",
+      "date": "2027-03-06T12:00:00-05:00",
+      "firstGate": "2027-03-06T12:00:00-05:00",
+      "where": "United Kingdom, Newcastle",
+      "status": "live",
+      "provider": "FIM SuperEnduro",
+      "watchUrl": "https://superenduro.org/",
+      "highlightsUrl": "https://www.youtube.com/@FIM",
+      "priority": 1,
+      "sourceUrl": "https://superenduro.org/",
+      "timeTBA": true
     },
     {
       "id": "supermotocross-ama-supercross-round-9-2027-03-06t19-00-00-05-00",
