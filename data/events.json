@@ -1,24 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-07T13:14:33.522Z",
+  "updatedAt": "2026-11-07T21:57:19.526Z",
   "events": [
-    {
-      "id": "gncc-racing-buckwheat-100-2026-11-06t09-00-00-05-00",
-      "name": "Buckwheat 100",
-      "round": "Round 13",
-      "series": "GNCC Racing",
-      "date": "2026-11-06T09:00:00-05:00",
-      "firstGate": "2026-11-06T09:00:00-05:00",
-      "where": "CJ Raceway · Newburg, WV",
-      "status": "live",
-      "provider": "RacerTV",
-      "watchUrl": "https://gnccracing.com/broadcasts",
-      "highlightsUrl": "https://www.youtube.com/@GNCCRacing",
-      "priority": 1,
-      "sourceUrl": "https://gnccracing.com/event/rd-13-cj-raceway",
-      "liveStart": "2026-11-06T09:00:00-05:00",
-      "liveEnd": "2026-11-08T17:00:00-05:00"
-    },
     {
       "id": "endurocross-salt-lake-city-ut-11-7-26-2026-11-07t19-00-00-07-00",
       "name": "Salt Lake City, UT - 11.7.26",
