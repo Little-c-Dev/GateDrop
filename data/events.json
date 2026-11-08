@@ -1,25 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-08T13:38:46.047Z",
+  "updatedAt": "2026-11-08T22:13:52.074Z",
   "events": [
-    {
-      "id": "endurocross-salt-lake-city-ut-11-7-26-2026-11-07t19-00-00-07-00",
-      "name": "Salt Lake City, UT - 11.7.26",
-      "round": "EnduroCross",
-      "series": "EnduroCross",
-      "date": "2026-11-07T19:00:00-07:00",
-      "firstGate": "2026-11-07T19:00:00-07:00",
-      "where": "Maverik Center",
-      "status": "live",
-      "provider": "EnduroCross TV",
-      "watchUrl": "https://endurocross.com/tv/",
-      "highlightsUrl": "https://www.youtube.com/@EnduroCross",
-      "priority": 0,
-      "sourceUrl": "https://endurocross.com/events/2026-rd4/",
-      "liveStart": "2026-11-07T19:00:00-07:00",
-      "liveEnd": "2026-11-08T07:00:00.000Z",
-      "imageUrl": "https://endurocross.com/wp-content/uploads/2024/06/5-2.png"
-    },
     {
       "id": "endurocross-idaho-falls-id-11-13-26-2026-11-13t19-00-00-07-00",
       "name": "Idaho Falls, ID - 11.13.26",
