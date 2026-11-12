@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-12T07:21:45.399Z",
+  "updatedAt": "2026-11-12T20:02:51.908Z",
   "events": [
     {
       "id": "endurocross-idaho-falls-id-11-13-26-2026-11-13t19-00-00-07-00",
@@ -299,6 +299,22 @@
       "highlightsUrl": "https://www.youtube.com/@SupercrossLive",
       "priority": 1,
       "sourceUrl": "https://www.supermotocross.com/schedule/"
+    },
+    {
+      "id": "fim-superenduro-fim-superenduro-gp-of-puerto-rico-2027-03-20t12-00-00-04-00",
+      "name": "FIM SuperEnduro GP of Puerto Rico",
+      "round": "Round 8",
+      "series": "SuperEnduro",
+      "date": "2027-03-20T12:00:00-04:00",
+      "firstGate": "2027-03-20T12:00:00-04:00",
+      "where": "Puerto Rico, San Juan",
+      "status": "live",
+      "provider": "FIM SuperEnduro",
+      "watchUrl": "https://superenduro.org/",
+      "highlightsUrl": "https://www.youtube.com/@FIM",
+      "priority": 1,
+      "sourceUrl": "https://superenduro.org/",
+      "timeTBA": true
     },
     {
       "id": "supermotocross-ama-supercross-round-11-2027-03-20t16-00-00-07-00",
