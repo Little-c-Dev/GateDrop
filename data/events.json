@@ -1,25 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-14T22:33:51.991Z",
+  "updatedAt": "2026-11-15T06:44:33.609Z",
   "events": [
-    {
-      "id": "endurocross-idaho-falls-id-11-13-26-2026-11-13t19-00-00-07-00",
-      "name": "Idaho Falls, ID - 11.13.26",
-      "round": "EnduroCross",
-      "series": "EnduroCross",
-      "date": "2026-11-13T19:00:00-07:00",
-      "firstGate": "2026-11-13T19:00:00-07:00",
-      "where": "Mountain America Center",
-      "status": "live",
-      "provider": "EnduroCross TV",
-      "watchUrl": "https://endurocross.com/tv/",
-      "highlightsUrl": "https://www.youtube.com/@EnduroCross",
-      "priority": 0,
-      "sourceUrl": "https://endurocross.com/events/2026-rd5/",
-      "liveStart": "2026-11-13T19:00:00-07:00",
-      "liveEnd": "2026-11-14T07:00:00.000Z",
-      "imageUrl": "https://endurocross.com/wp-content/uploads/2024/06/1.png"
-    },
     {
       "id": "endurocross-idaho-falls-id-11-14-26-2026-11-14t19-00-00-07-00",
       "name": "Idaho Falls, ID - 11.14.26",
