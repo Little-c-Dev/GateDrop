@@ -1,25 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-15T18:56:26.602Z",
+  "updatedAt": "2026-11-16T06:43:24.767Z",
   "events": [
-    {
-      "id": "endurocross-idaho-falls-id-11-14-26-2026-11-14t19-00-00-07-00",
-      "name": "Idaho Falls, ID - 11.14.26",
-      "round": "EnduroCross",
-      "series": "EnduroCross",
-      "date": "2026-11-14T19:00:00-07:00",
-      "firstGate": "2026-11-14T19:00:00-07:00",
-      "where": "Mountain America Center",
-      "status": "live",
-      "provider": "EnduroCross TV",
-      "watchUrl": "https://endurocross.com/tv/",
-      "highlightsUrl": "https://www.youtube.com/@EnduroCross",
-      "priority": 0,
-      "sourceUrl": "https://endurocross.com/events/2026-rd6/",
-      "liveStart": "2026-11-14T19:00:00-07:00",
-      "liveEnd": "2026-11-15T07:00:00.000Z",
-      "imageUrl": "https://endurocross.com/wp-content/uploads/2024/06/1.png"
-    },
     {
       "id": "fim-superenduro-fim-superenduro-gp-of-poland-2026-12-05t12-00-00-05-00",
       "name": "FIM SuperEnduro GP of Poland",
